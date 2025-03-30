@@ -13,16 +13,16 @@ export const Cart = () => {
   const openGoodsCart = () => {
     setOpen(!open);
   };
-  const { data, isSuccess, isLoading } = useGetCartQuery({
-    userName,
-  });
+  // const { data, isSuccess, isLoading } = useGetCartQuery({
+  //   userName,
+  // });
 
-  useEffect(() => {
-    if (data) {
-      dispatch(updateLocalCart(data));
-      console.log(data, "обновился");
-    }
-  }, [isSuccess, isLogged, isLoading, data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(updateLocalCart(data));
+  //     console.log(data, "обновился");
+  //   }
+  // }, [isSuccess, isLogged, isLoading, data]);
   return (
     <>
       {isLogged ? (

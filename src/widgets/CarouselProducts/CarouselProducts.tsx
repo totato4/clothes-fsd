@@ -5,56 +5,32 @@ import "swiper/css/free-mode";
 import "swiper/css/hash-navigation";
 
 import ProductCard from "entities/product/ui/ProductCard";
-import ResetBtn from "features/ResetButton/ResetBtn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { MatchMediaProps, useMatchMedia } from "shared/model/UseMatchMedia";
 
 import CarouselButton from "shared/uiKit/CarouselButton";
 import Separator from "shared/uiKit/Separator";
 import ItemPageLoader from "entities/product/ui/ItemPageLoader";
-import { Product, ProductDto } from "entities/product/api/types";
+import { human_c, Product } from "entities/product/api/types";
+import ResetButton from "features/ResetButton/ResetBtn";
+import { useGetByHumanQuery } from "entities/product/api/productApi";
 
 type props = {
-  human_c: string;
+  human_c: human_c;
   title: string;
-  data: ProductDto | undefined;
-  isSuccess: boolean;
-  isLoading: boolean;
-  isError: boolean;
 };
 
-const CarouselProducts = ({
-  human_c,
-  title,
-  data,
-  isSuccess,
-  isLoading,
-  isError,
-}: props) => {
+const CarouselProducts = ({ human_c, title }: props) => {
   const { isMobile }: MatchMediaProps = useMatchMedia();
-  //   const [items, setItems] = useState<IProduct[] | []>([]);
-  //   const [status, setStatus] = useState<Status>(Status.LOADING);
-  const [product, setProduct] = useState<Product[]>([] as Product[]);
   const [swipe, setSwipe] = useState<SwiperCore | undefined>();
+  const { data, isLoading, isSuccess, isError } = useGetByHumanQuery(human_c);
 
-  useEffect(() => {
-    data && setProduct(data.product);
-  }, [isSuccess, data]);
-
-  const skeleton = [...new Array(6)].map(() => (
+  const loading = [...new Array(6)].map(() => (
     <SwiperSlide>
       <ItemPageLoader />
     </SwiperSlide>
   ));
-
-  const productCardList =
-    isSuccess &&
-    product.map((obj: Product) => (
-      <SwiperSlide key={obj.title}>
-        <ProductCard item={obj} />
-      </SwiperSlide>
-    ));
 
   return (
     <div className="container max-w-[1144px] mx-auto mt-[36px] mb-[80px]">
@@ -82,10 +58,12 @@ const CarouselProducts = ({
           </div>
         )}
         <div className="flex  desktop:w-[100vw] w-[95vw] max-w-[1144px] sm:px-0 px-[20px] ">
+          {isError && <ResetButton />}
           <Swiper
             grabCursor={true}
             slidesPerView={5}
             spaceBetween={5}
+            loop={true}
             onBeforeInit={(swipper) => setSwipe(swipper)}
             breakpoints={{
               0: {
@@ -120,9 +98,13 @@ const CarouselProducts = ({
               },
             }}
           >
-            {isLoading && skeleton}
-            {isSuccess && productCardList}
-            {isError && <ResetBtn />}
+            {isSuccess &&
+              data.product.map((obj: Product) => (
+                <SwiperSlide key={obj.id}>
+                  <ProductCard item={obj} />
+                </SwiperSlide>
+              ))}
+            {isLoading && loading}
           </Swiper>
         </div>
         {isMobile && status !== "error" && (

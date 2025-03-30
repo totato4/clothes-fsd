@@ -7,6 +7,7 @@ const JwtInMemo = () => {
     refreshTimeoutId = setTimeout(() => {}, timeoutTrigger);
   };
   const getToken = () => inMemoryJWT;
+  const getRefreshTimeoutId = () => refreshTimeoutId;
   const abortRefreshToken = () => {
     if (refreshTimeoutId) {
       clearInterval(refreshTimeoutId);
@@ -22,7 +23,7 @@ const JwtInMemo = () => {
     localStorage.setItem("logout", Date.now().toString());
   };
 
-  return { getToken, setToken, deleteToken };
+  return { getToken, setToken, deleteToken, getRefreshTimeoutId };
 };
 
 export default JwtInMemo();

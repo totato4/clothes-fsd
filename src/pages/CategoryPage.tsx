@@ -16,6 +16,7 @@ export const CategoryPage = () => {
   console.log(location.search);
   const { data, isError, isLoading, isSuccess } =
     useGetCategoryProductQuery(location);
+  console.log(data);
   return (
     <>
       <div
@@ -55,7 +56,7 @@ export const CategoryPage = () => {
                 </div>
               )}
             </div>
-            <PaginationComponent />
+            <PaginationComponent totalPages={16} />
             <CategoryFooter />
           </div>
         </div>

@@ -10,15 +10,17 @@ export type Product = {
   brand: string;
   image_url: string;
   color: string;
-}
+};
 
 export type ProductDto = {
-  product: Product[],
-  totalPages: string | number;
+  product: Product[];
+  totalPages: number;
   totalCount: number;
-}
+};
 
 export type params = {
   human_c?: string;
   search?: unknown;
-}
+};
+
+export type human_c = "woman" | "man" | "kid";
