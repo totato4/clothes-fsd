@@ -20,8 +20,19 @@ export const productApi = baseApi.injectEndpoints({
     logout: build.query<AuthDto, void>({
       query: () => ({ url: `/auth/logout` }),
     }),
-    refresh: build.query<AuthDto, void>({
-      query: () => ({ url: `/auth/refresh` }),
+    refresh: build.mutation<AuthDto, void>({
+      // query: () => ({ url: `/auth/refresh` }),
+      query: () => ({
+        url: `/auth/refresh`,
+        method: "GET",
+      }),
+    }),
+    getUser: build.mutation<{ name: string; role: number }, string>({
+      query: (accessToken) => ({
+        url: `/auth/user`,
+        method: "POST",
+        body: { accessToken: accessToken },
+      }),
     }),
   }),
 });
@@ -30,5 +41,6 @@ export const {
   useSignInMutation,
   useSignUpMutation,
   useLogoutQuery,
-  useRefreshQuery,
+  useRefreshMutation,
+  useGetUserMutation,
 } = productApi;

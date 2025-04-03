@@ -20,7 +20,7 @@ export type ProductDto = {
 
 export type params = {
   human_c?: string;
-  search?: unknown;
+  search?: null;
 };
 
 export type human_c = "woman" | "man" | "kid";

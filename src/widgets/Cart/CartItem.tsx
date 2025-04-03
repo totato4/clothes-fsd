@@ -1,6 +1,5 @@
 import { addOneItem, removeItem, removeOneItem } from "entities/cart";
 import { useGetOneProductQuery } from "entities/product/api/productApi";
-import { useEffect } from "react";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { MdOutlineDeleteForever } from "react-icons/md";
 import { useAppDispatch } from "shared/model";
@@ -8,21 +7,25 @@ import { useAppDispatch } from "shared/model";
 type props = { id: number; quantity: number };
 
 export const CartItem = ({ id, quantity }: props) => {
-  const { data, isLoading, isError } = useGetOneProductQuery({ id });
-  const product = data && data.product[0];
-
   const dispatch = useAppDispatch();
+  const { data, isLoading, isError } = useGetOneProductQuery({ id });
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading product</div>;
+  if (!data?.product?.[0]) return <div>Product not found</div>;
+
+  const product = data.product[0];
+
   return (
     <div className="flex flex-nowrap w-full max-h-17 justify-between">
       <img
-        src={product && product.image_url}
+        src={`../img/${product.image_url}`}
         alt="product"
         className="w-[20%]"
       />
       <div>
-        <div>{product && product.title}</div>
+        <div>{product.title}</div>
         <div className="flex flex-nowrap flex-col gap-y-1 gap-x-1">
-          <div>цена:{product && product.price * quantity} р</div>
+          <div>цена:{data.product[0].price * quantity} р</div>
           <div className="flex justify-center gap-x-2">
             <button onClick={() => dispatch(removeOneItem(id))}>
               <CiCircleMinus className="w-5 h-5" />
