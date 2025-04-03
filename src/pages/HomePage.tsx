@@ -1,20 +1,9 @@
-import { useGetUserMutation, useRefreshQuery } from "entities/auth/api/authApi";
-import inMemoryJWT from "entities/auth/model/inMemoryJWT";
-import { useEffect } from "react";
 import { MatchMediaProps, useMatchMedia } from "shared/model/UseMatchMedia";
 import CarouselProducts from "widgets/CarouselProducts/CarouselProducts";
 import ClothesTags from "widgets/ClothesTags/ClothesTags";
 
 const HomePage = () => {
   const { isMobile, isTablet }: MatchMediaProps = useMatchMedia();
-  const accessToken = inMemoryJWT.getToken();
-
-  // const { data, isSuccess } = useRefreshQuery();
-
-  // useEffect(() => {
-  //   inMemoryJWT.setToken(data?.accessToken, data?.accessTokenExpiration);
-  //   // console.log(userData, "is USERDATA");
-  // }, [data]);
 
   return (
     <div
