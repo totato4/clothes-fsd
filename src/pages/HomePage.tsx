@@ -25,7 +25,6 @@ const HomePage = () => {
       <div className="">
         {/* i understand how use not-last-child in tailwnd, but is not  . This is delete last child margin bottom */}
         <div className="mb-[-80px]">
-          <button className="w-[200px] h-[200px] ">{}</button>
           <CarouselProducts
             human_c={"woman"}
             key={"woman product"}
