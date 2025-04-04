@@ -12,10 +12,10 @@ import ResetButton from "features/ResetButton/ResetBtn";
 
 export const CategoryPage = () => {
   const { isMobile, isTablet, isDesktop }: MatchMediaProps = useMatchMedia();
-  const location = useLocation();
+  const { search } = useLocation();
   console.log(location.search);
   const { data, isError, isLoading, isSuccess } =
-    useGetCategoryProductQuery(location);
+    useGetCategoryProductQuery(search);
   console.log(data);
   return (
     <>

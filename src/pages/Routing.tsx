@@ -82,7 +82,7 @@ const ProtectedRoute = () => {
     };
 
     checkAuth();
-  }, []);
+  }, [refreshToken]);
 
   if (isLoading) {
     return <div>Loading...</div>; // Или ваш лоадер

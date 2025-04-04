@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useSignInMutation } from "entities/auth/api/authApi";
@@ -22,20 +22,22 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      const { accessToken, accessTokenExpiration, userName } = data;
-      JwtInMemo.setToken(accessToken, accessTokenExpiration);
-      console.log("IN JWT", JwtInMemo.getToken());
-      console.log("userName", userName);
-      dispatch(login(userName));
+      const { accessToken, accessTokenExpiration, userName } = data || {};
+      if (accessToken && accessTokenExpiration && userName) {
+        JwtInMemo.setToken(accessToken, accessTokenExpiration);
+        console.log("IN JWT", JwtInMemo.getToken());
+        console.log("userName", userName);
+        dispatch(login(userName));
+      }
     }
-  }, [data, isSuccess]);
+  }, [data, isSuccess, dispatch]);
 
   const [eye, setEye] = useState(true);
 
   // redirect
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  // const navigate = useNavigate();
+  // const location = useLocation();
+  // const from = location.state?.from?.pathname || "/";
 
   // const email = useAppSelector((state) => state.authSlice.email);
   // useEffect(() => {

@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import { CartButton } from "./CartButton";
 import { CartPannel } from "./CartPannel";
-import { useAppDispatch, useAppSelector } from "shared/model";
-import { useGetCartQuery } from "entities/cart/api/cartApi";
-import { updateLocalCart } from "entities/cart/model/slice";
+import { useAppSelector } from "shared/model";
 
 export const Cart = () => {
-  const dispatch = useAppDispatch();
-  const { isLogged, userName } = useAppSelector((state) => state.AUTH_TAG);
+  const { isLogged } = useAppSelector((state) => state.AUTH_TAG);
   const [open, setOpen] = useState<boolean>(false);
   const openGoodsCart = () => {
     setOpen(!open);

@@ -1,10 +1,10 @@
 import { useSearchParams } from "react-router-dom";
 
-const array = {
-  man: "Товары для мужчин",
-  woman: "Товары для женщин",
-  kid: "Товары для детей",
-};
+// const array = {
+//   man: "Товары для мужчин",
+//   woman: "Товары для женщин",
+//   kid: "Товары для детей",
+// };
 
 const Header = ({ totalCount = 0 }: { totalCount?: number }) => {
   const [searchParams] = useSearchParams();

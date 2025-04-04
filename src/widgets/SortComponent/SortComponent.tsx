@@ -1,6 +1,4 @@
-import { useState } from "react";
 import ItemFilter from "./ItemFilter";
-import { useLocation, useSearchParams } from "react-router-dom";
 import { arrayBrand, arrayColor, arraySize } from "./constants/Constants";
 import SortPrice from "./SortPrice";
 

@@ -35,11 +35,13 @@ export const SignUp = () => {
   };
   useEffect(() => {
     if (isSuccess) {
-      const { accessToken, accessTokenExpiration, userName } = data;
-      JwtInMemo.setToken(accessToken, accessTokenExpiration);
-      console.log("IN JWT", JwtInMemo.getToken());
-      console.log("userName", userName);
-      dispatch(login(userName));
+      const { accessToken, accessTokenExpiration, userName } = data || {};
+      if (accessToken && accessTokenExpiration && userName) {
+        JwtInMemo.setToken(accessToken, accessTokenExpiration);
+        console.log("IN JWT", JwtInMemo.getToken());
+        console.log("userName", userName);
+        dispatch(login(userName));
+      }
     }
   }, [data, isSuccess, dispatch]);
 

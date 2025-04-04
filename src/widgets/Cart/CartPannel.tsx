@@ -1,8 +1,7 @@
-import { useAppDispatch, useAppSelector, useDebounce } from "shared/model";
+import { useAppDispatch, useAppSelector } from "shared/model";
 import { CartItem } from "./CartItem";
-import { ProductInCart, clearCartData } from "entities/cart";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { useUpdateCartMutation } from "entities/cart/api/cartApi";
+import { clearCartData } from "entities/cart";
+import { Dispatch, SetStateAction } from "react";
 
 export const CartPannel = ({
   open,

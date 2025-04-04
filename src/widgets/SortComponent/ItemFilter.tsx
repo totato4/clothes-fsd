@@ -103,7 +103,7 @@ const ItemFilter = ({ paramName, valuesList, title }: props) => {
                       value={obj.name}
                       // checked={!!val.find((elem) => elem == obj.name)}
                       checked={val == obj.name}
-                      onChange={(e) => console.log("click")}
+                      // onChange={() => console.log("click")}
                       //             className=" before:w-[8px] before:h-[8px] before:border before:rounded-[50%] before:bg-yc1 before:border-yc1
                       //  border-gcE5 relative before:absolute before:top-[50%] before:left-[50%] before:translate-x-[-50%] before:translate-y-[-50%] "
                       className="hidden"

@@ -1,10 +1,10 @@
 import { baseApi } from "shared/api/baseApi";
-import { ProductDto, human_c, params } from "./types";
+import { ProductDto, human_c } from "./types";
 
 export const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    getCategoryProduct: build.query<ProductDto, params>({
-      query: ({ search }) => ({ url: `/api/clothes${search}` }),
+    getCategoryProduct: build.query<ProductDto, string>({
+      query: (search) => ({ url: `/api/clothes${search}` }),
     }),
     getByHuman: build.query<ProductDto, human_c>({
       query: (human_c) => ({

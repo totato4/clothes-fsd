@@ -1,5 +1,5 @@
 import { baseApi } from "shared/api/baseApi";
-import { AuthDto, SignUpDto, params } from "./types";
+import { AuthDto, params, SignUpDto } from "./types";
 
 export const productApi = baseApi.injectEndpoints({
   endpoints: (build) => ({

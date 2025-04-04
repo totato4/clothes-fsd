@@ -1,25 +1,24 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useScrollDirection } from "shared/model/useScrollDirection";
-import ButtonBack from "./ButtonBack";
 
 const HeaderMobile = () => {
   const scrollDirection = useScrollDirection();
 
   React.useEffect(() => {}, [scrollDirection]);
 
-  const [menuState, setMenuState] = React.useState(1);
+  // const [menuState, setMenuState] = React.useState(1);
   const [showMenu, setShowMenu] = React.useState(false);
   const [searchVal, setSearchVal] = React.useState("");
 
-  const goBack = () => {
-    if (menuState > 1) {
-      setMenuState(menuState - 1);
-    }
-  };
+  // const goBack = () => {
+  //   if (menuState > 1) {
+  //     setMenuState(menuState - 1);
+  //   }
+  // };
 
   const HandleShowMenu = () => {
-    setMenuState(1);
+    // setMenuState(1);
     setShowMenu(!showMenu);
   };
 
