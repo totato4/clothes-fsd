@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 import { CartButton } from "./CartButton";
 import { CartPannel } from "./CartPannel";
 import { useAppSelector } from "shared/model";
+import { useOnClickOutside } from "usehooks-ts";
 
 export const Cart = () => {
   const { isLogged } = useAppSelector((state) => state.AUTH_TAG);
@@ -10,6 +11,11 @@ export const Cart = () => {
   const openGoodsCart = () => {
     setOpen(!open);
   };
+
+  const cartRef = useRef<HTMLDivElement>(null);
+  const handleClosePannel = () => setOpen(false);
+
+  useOnClickOutside(cartRef, handleClosePannel);
   // const { data, isSuccess, isLoading } = useGetCartQuery({
   //   userName,
   // });
@@ -23,7 +29,7 @@ export const Cart = () => {
   return (
     <>
       {isLogged ? (
-        <div className="w-full h-full relative z-50">
+        <div ref={cartRef} className="w-full h-full relative z-50">
           <CartPannel open={open} setOpen={setOpen} />
           {!open && <CartButton open={open} openGoodsCart={openGoodsCart} />}
         </div>
