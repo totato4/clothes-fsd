@@ -1,15 +1,22 @@
-import { useGetUserInfoQuery } from "entities/user/api/userApi";
-import React from "react";
-import { useAppSelector } from "shared/model";
+import { useGetUserMutation } from "entities/auth/api/authApi";
+import inMemoryJWT from "entities/auth/model/inMemoryJWT";
+import { useEffect } from "react";
 
 function UserPage() {
-  const userName = useAppSelector((state) => state.AUTH_TAG.userName);
-  const { data, isLoading, isSuccess } = useGetUserInfoQuery({
-    userName,
-  });
+  const accessToken = inMemoryJWT.getToken();
+  // const userName = useAppSelector((state) => state.AUTH_TAG.userName);
+  // const { data, isLoading, isSuccess } = useGetUserInfoQuery({
+  //   userName,
+  // });
+
+  const [getUser, { data }] = useGetUserMutation();
+  useEffect(() => {
+    accessToken && getUser(accessToken);
+  }, [accessToken, getUser]);
   return (
     <div>
-      UserName: {isSuccess && data} {isLoading && "Загрузка данных..."}
+      Имя пользователя: {data?.name} <br />
+      Статус: {data?.role == 1 && "Обычный пользователь"}
     </div>
   );
 }

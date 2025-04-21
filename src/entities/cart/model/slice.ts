@@ -1,37 +1,27 @@
-import {
-  type PayloadAction,
-  createSlice,
-} from '@reduxjs/toolkit'
-import { Cart, ProductInCart } from './types'
-import { cartApi } from '../api/cartApi'
+import { type PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { Cart, ProductInCart } from "./types";
 
-type CartSliceState = Cart
+type CartSliceState = Cart;
 
 const initialState: CartSliceState = {
   itemsMap: [],
   version: 0,
-}
-
-// function createCartItem(id: number): ProductInCart {
-//   return {
-//     quantity: 1,
-//     id,
-//   }
-// }
+};
 
 export const cartSlice = createSlice({
-  name: 'CART_TAG',
+  name: "CART_TAG",
   initialState,
   reducers: {
     clearCartData: (state) => {
-      state.itemsMap = []
+      state.itemsMap = [];
     },
     updateLocalCart: (state, action: PayloadAction<ProductInCart[]>) => {
-      state.itemsMap = action.payload
+      state.itemsMap = action.payload;
     },
-    addOneItem: (state, action: PayloadAction< number>) => {
-      
-      const existingItem = state.itemsMap.find((item) => item.id === action.payload);
+    addOneItem: (state, action: PayloadAction<number>) => {
+      const existingItem = state.itemsMap.find(
+        (item) => item.id === action.payload
+      );
       if (existingItem) {
         existingItem.quantity++;
       } else {
@@ -39,38 +29,43 @@ export const cartSlice = createSlice({
       }
     },
     removeOneItem: (state, action: PayloadAction<number>) => {
-      const existingItem = state.itemsMap.find((item) => item.id === action.payload);
-      
+      const existingItem = state.itemsMap.find(
+        (item) => item.id === action.payload
+      );
+
       if (existingItem && existingItem.quantity <= 1) {
-        return
+        return;
       }
 
       if (existingItem && existingItem.quantity > 1) {
-        existingItem.quantity--
-        
+        existingItem.quantity--;
       }
     },
     removeItem: (state, action: PayloadAction<number>) => {
-      const indexToUpdate = state.itemsMap.findIndex(item => item.id === action.payload)
+      const indexToUpdate = state.itemsMap.findIndex(
+        (item) => item.id === action.payload
+      );
       const item = state.itemsMap[indexToUpdate];
       if (!item) {
-        return
+        return;
       }
-      state.itemsMap = state.itemsMap.filter(item => item.id !== action.payload)
-    }
+      state.itemsMap = state.itemsMap.filter(
+        (item) => item.id !== action.payload
+      );
+    },
   },
-  extraReducers: (builder) => {
-    // builder.addMatcher(
-    //   cartApi.endpoints.cart.matchFulfilled,
-    //   (state: CartSliceState, { payload }) => {
-    //     // update cart state if server sent actual version
-    //     if (state.version <= payload.version) {
-    //       state.itemsMap = payload.itemsMap
-    //     }
-    //   }
-    // )
-  },
-})
+  // extraReducers: (builder) => {
+  // builder.addMatcher(
+  //   cartApi.endpoints.cart.matchFulfilled,
+  //   (state: CartSliceState, { payload }) => {
+  //     // update cart state if server sent actual version
+  //     if (state.version <= payload.version) {
+  //       state.itemsMap = payload.itemsMap
+  //     }
+  //   }
+  // )
+  // },
+});
 
 // export const selectCartTotalPrice = (state: RootState) =>
 //   Object.values(state.cart.itemsMap).reduce(
@@ -95,10 +90,9 @@ export const cartSlice = createSlice({
 // )
 
 export const {
-  
   addOneItem,
   removeOneItem,
   removeItem,
   clearCartData,
   updateLocalCart,
-} = cartSlice.actions
+} = cartSlice.actions;

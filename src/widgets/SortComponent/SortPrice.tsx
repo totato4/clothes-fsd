@@ -35,11 +35,11 @@ const SortPrice = () => {
   const [price_max, setPrice_max] = useState(10000);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const onChangeValue = (paramName: string, value: string) => {
-    searchParams.set(paramName, value);
-  };
+  // const onChangeValue = (paramName: string, value: string) => {
+  //   searchParams.set(paramName, value);
+  // };
 
-  const updateRange = (event: Event, value: number[]) => {
+  const updateRange = (_event: Event, value: number[]) => {
     setPrice_min(value[0]);
     setPrice_max(value[1]);
   };

@@ -1,8 +1,7 @@
-import { useAppDispatch, useAppSelector, useDebounce } from "shared/model";
+import { useAppDispatch, useAppSelector } from "shared/model";
 import { CartItem } from "./CartItem";
-import { ProductInCart, clearCartData } from "entities/cart";
-import { Dispatch, SetStateAction, useEffect } from "react";
-import { useUpdateCartMutation } from "entities/cart/api/cartApi";
+import { clearCartData } from "entities/cart";
+import { Dispatch, SetStateAction } from "react";
 
 export const CartPannel = ({
   open,
@@ -12,22 +11,22 @@ export const CartPannel = ({
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
   const dispatch = useAppDispatch();
-  const { userName, isLogged } = useAppSelector((state) => state.AUTH_TAG);
+  // const { userName, isLogged } = useAppSelector((state) => state.AUTH_TAG);
   const { itemsMap } = useAppSelector((state) => state.CART_TAG);
 
-  const debouncedValue = useDebounce<ProductInCart[]>(itemsMap, 5000);
-  const [updateData] = useUpdateCartMutation();
-  useEffect(() => {
-    const updateCart = async () => {
-      try {
-        console.log(debouncedValue);
-        await updateData({ userName, products: debouncedValue });
-      } catch (err) {
-        console.error("не удалось обновить корзину", err);
-      }
-    };
-    updateCart();
-  }, [debouncedValue]);
+  // const debouncedValue = useDebounce<ProductInCart[]>(itemsMap, 5000);
+  // const [updateData] = useUpdateCartMutation();
+  // useEffect(() => {
+  //   const updateCart = async () => {
+  //     try {
+  //       console.log(debouncedValue);
+  //       await updateData({ userName, products: debouncedValue });
+  //     } catch (err) {
+  //       console.error("не удалось обновить корзину", err);
+  //     }
+  //   };
+  //   updateCart();
+  // }, [debouncedValue]);
 
   let countProduct = 0;
   if (Array.isArray(itemsMap)) {

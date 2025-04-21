@@ -18,7 +18,7 @@ const ProductCard = ({ item, children }: props) => {
         <div className="relative max-w-[224px] max-h-[340px] select-none">
           <img
             className="w-[224px] h-[340px] overflow-hidden object-cover"
-            src={image_url}
+            src={`../img/${image_url}`}
             alt="clothes photo"
           />
 

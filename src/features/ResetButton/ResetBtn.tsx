@@ -1,6 +1,6 @@
 const ResetButton = () => {
   return (
-    <div className=" mr-auto grid gap-y-2">
+    <div className=" w-[100%] h-[100%] flex justify-center items-center flex-col min-h-[190.5px] gap-[12px]">
       <div>
         Не удалось загрузить товары...
         <br /> Попробуйте перезагрузить страницу
